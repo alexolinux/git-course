@@ -1,6 +1,6 @@
 **GIT/GITHUB FOR BEGINNERS (ENVIRONMENT)**
 
-    git config --global user.name "Alex"
+    git config --global user.name "Alex Mendes"
     git config --global user.email "alexmendes@mymail.com"
     git config --global core.editor vim
 
