@@ -209,7 +209,7 @@ Push an existing repository from the command line
 
 **CHECKING FOR REPOSITORY EXISTENCE**
 
-    git remote origin <- Output Command.
+    git remote show origin <- Output Command.
 
 **VERBOSE MODE**
 
