@@ -654,6 +654,6 @@ Bem, por enquanto é isso!
 	- <https://git-scm.com/book/pt-br/v1/Primeiros-passos-No%C3%A7%C3%B5es-B%C3%A1sicas-de-Git>
 	- <https://br.atlassian.com/git/tutorials/>
 	- <https://git-scm.com/docs/user-manual.htmlh>
-    	- <http://ndpsoftware.com/git-cheatsheet.html>
-    	- <https://www.git-tower.com/learn/git/faq/delete-remote-branch>
+	- <http://ndpsoftware.com/git-cheatsheet.html>
+	- <https://www.git-tower.com/learn/git/faq/delete-remote-branch>
 	- <https://pt.stackoverflow.com/questions/80583/qual-%C3%A9-a-diferen%C3%A7a-entre-um-branch-e-uma-tag>
