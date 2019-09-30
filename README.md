@@ -84,13 +84,13 @@ Exemplificando:
 
 01 - Antes de execução 'git add' (staged phase):
 
-(use "git checkout -- ..." to discard changes in working directory)
+(use "git checkout -- ..." para descartar mudanças no diretório de trabalho)
 
     git checkout <FILE>
 
-02 - Depois de 'git add' (staged phase (ready to commit))
+02 - Depois de 'git add' (fase staged (ready to commit))
 
-(use "git reset HEAD ..." to unstage)
+(use "git reset HEAD ..." para voltar ao unstage)
 
     git reset HEAD <FILE>
 
