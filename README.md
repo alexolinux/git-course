@@ -30,7 +30,7 @@ Ao se trabalhar com o git, é importante entendermos o conceito por trás desta 
 > << UNTRACKED > UNMODIFIED > MODIFIED > STAGED >><< UNTRACKED > UNMODIFIED > MODIFIED > STAGED >>
 
 [![git - The lifecycle of the status of your files.](https://git-scm.com/book/en/v2/images/lifecycle.png "git - The lifecycle of the status of your files.")](https://git-scm.com/book/en/v2/images/lifecycle.png "git - The lifecycle of the status of your files.")
-###### 1. ciclo de vida de status dos arquivos.
+1.ciclo de vida de status dos arquivos.
 
 Entre os estados do git, é importante entendermos os três principais:
 1. **committed:** Estado consolidado ou popularmente "comitado".
@@ -280,7 +280,7 @@ Example:
 Geralmente, forks são usados para propor alterações no projeto de outra pessoa ou para usar o projeto de outra pessoa como ponto de partida para sua própria idéia.
 
 ![alt text](https://help.github.com/assets/images/help/repository/fork_button.jpg)
-######2. Barra com a option FORK.
+2.Barra com a option FORK.
 
 **O QUE É BRANCH?**
 **Branches** são ponteiros para um instantâneo de suas alterações. Quando você deseja adicionar um novo recurso ou corrigir um erro - não importa quão grande ou pequeno - você gera uma nova ramificação (gera um branch) para encapsular suas alterações. É uma maneira de proteger seu projeto de grandes e significativas mudanças que podem causar impacto no conteúdo projeto de uma maneira geral.
@@ -291,7 +291,7 @@ Isso dificulta a mesclagem do código instável na base de código principal e o
 Com este comando vamos criar, listar, renomear e deletar branches.
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:746be214-eb99-462c-9319-04a4d2eeebfa/01.svg)
-######3. Árvore de branches
+3.Árvore de branches
 
 git branch não permite alternar entre as branches ou reunir um histórico de um fork anterior novamente. Por esta razão o git branch está fortemente integrado com os comandos **git checkout** e **git merge** (que veremos em seguida).
 
@@ -361,19 +361,19 @@ Existem 2 maneiras diferentes de unir branches. Elas são:
 **git merge** irá combinar múltiplas sequências de commits num histórico unificado. Na maioria dos casos, o **git merge** geralmente é utilizado para combinar duas branches. Nos exemplos a seguir, veremos uma espécia de merging pattern, nestes cenários teremos dois ponteiros de commits, indo para uma base em comum entre eles:
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:86eba9ec-9391-45ea-800a-948cec1f2ed7/Branch-2.png)
-######4.Um exemplo de git merge.
+4.Um exemplo de git merge.
 
 Invocando este comando ele fará o merge da feature branch especificada na branch atual, assumindo a master. O git determinará o algoritmo de mesclagem automaticamente:
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:83323200-3c57-4c29-9b7e-e67e98745427/Branch-1.png)
-######5.Um exemplo de git merge.
+5.Um exemplo de git merge.
 
 **merge commits** são únicas em relação a outras no fato de terem dois commits pais. Ao criar um merge consolidado, o git tentará mesclar automaticamente os históricos separados para você.
 
 **git merge - ANTES E DEPOIS**
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:91b1bdf5-fda3-4d20-b108-0bb9eea402b2/08.svg)
-######6.git merge (antes e depois).
+6.git merge (antes e depois).
 
 O código abaixo cria uma nova branch, adiciona dois commits e a integra à linha principal com uma merge "fast-forward".
 
@@ -401,7 +401,7 @@ Como vimos, **merge** acontece ao combinarmos duas branches. O git pegará dois 
 Vimos bastante sobre o git merge, agora vamos entrar no **git rebase**. "Rebasing" é o processo de mover ou combinar uma sequência de commits *para uma nova base commit*. Ele é mais útil e facilmente visualizado no contexto de uma *feature branching workflow* (neste conceito, um novo branch é criado para cada nova feature). Este workflow será visto a seguir:
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:e4a40899-636b-4988-9774-eaa8a440575b/02.svg)
-######7. git rebase
+7.git rebase
 
 De uma perspectiva de conteúdo, o rebasing está alterando a base de sua branch de um commit para outro, fazendo parecer que você criou sua branch a partir de um commit diferente. Internamente, o git realiza isso criando novos commits e aplicando-os à base especificada.
 *É muito importante entender que, embora a *branch* pareça a mesma, ela é composta de commits novos*.
@@ -450,6 +450,7 @@ Isso move a nova feature para a ponta da branch master, o que nos permite fazer 
 Quando você executa o **git merge**, sua branch HEAD gera um novo commit, preservando a ancestralidade de cada histórico de commit.
 
 ![alt text](https://storage.kraken.io/kk8yWPxzXVfBD3654oMN/673b91456bdc6fd454c5ad203f825568/git-merge-2.png)
+8.1.git merge
 
 Fast forward merge is a type of merge that doesn't create a commit, instead, it updates the branch pointer to the last commit.
 
@@ -470,7 +471,7 @@ The rebase re-writes the changes of one branch onto another without creating a n
 For every commit that you have on the feature branch and not in the master, a new commit will be created on top of the master. It will appear as if those commits were written on top of master branch all along.
 
 ![alt text](https://storage.kraken.io/kk8yWPxzXVfBD3654oMN/5ade4f7276bc6ad18dad4b6078950ac9/git-rebase.png)
-######8.git merge.
+8.2.git rebase.
 
 Pros:
 
@@ -495,7 +496,7 @@ Geralmente em nossos repositórios, geralmente existem algums arquivos que não 
 **gitignore** - Especifica arquivos que não devem ser rastreados para envio ao repositório remoto (devem ser *ignorados*).
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:75f75cb6-a6ab-4f0b-ab29-e366914f513c/hero.svg)
-######9.gitignore
+9.gitignore
 
 O git enxerga todos os arquivos em sua cópia de trabalho como uma das três coisas:
 
@@ -625,7 +626,7 @@ Isso requer que sua árvore de trabalho esteja limpa (nenhuma modificação do c
 O comando git revert pode ser considerado um "undo", no entanto, não é uma operação undo tradicional. Em vez de remover a confirmação do histórico do projeto, ele descobre como inverter as alterações introduzidas pelos commits e anexa um novo commit com o conteúdo inverso resultante.
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:b6fcf82b-5b15-4569-8f4f-a76454f9ca5b/03%20(7).svg)
-######10.git revert.
+10.git revert.
 
 **git revert exemplos:**
 Revertendo alterações especificadas pelo quarto último commit no HEAD e criando um novo commit com as alterações revertidas:
@@ -642,7 +643,7 @@ Revertendo as alterações feitas por commits do quinto último commit na branch
 *No git, isso é chamado de reset, e não revert, ok?*
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:a6a50d78-48e3-4765-8492-9e48dec8fd2f/04%20(2).svg)
-######11.git revert
+11.git revert
 
 Bem, por enquanto é isso!
 
