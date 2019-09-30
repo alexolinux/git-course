@@ -1,112 +1,124 @@
-**GIT/GITHUB FOR BEGINNERS (ENVIRONMENT)**
+
+**GIT/GITHUB para iniciantes**
+Este conteúdo tem como objetivo uma abordagem geral do git como ferramenta de versionamento. Descreveremos os principais recursos do git, assim como a configuração inicial do ambiente, para que possamos entender como utilizá-la no nosso dia a dia.
+
+**ENVIRONMENT**
+Antes de começarmos a por a "mão-na-massa", é importante configurarmos nosso ambiente com a nossa identidade. Para isso, vamos definir as nossas configurações de ambiente com nossas credenciais a serem utilizadas pelo nosso(s) projeto(s). Abaixo, definiremos nosso nome, nosso e-mail e opcionalmente o nosso editor preferido:
 
     git config --global user.name "Alex Mendes"
     git config --global user.email "alexmendes@mymail.com"
     git config --global core.editor vim
 
-**GETTING INFORMATION**
+**OBTENDO INFORMAÇÕES**
+Feita a nossa configuração inicial, caso desejarmos checar se tudo está ok, é só validarmos como se segue abaixo:
 
-    git config --list --> Get information of all variables.
+    git config --list
     git config user.name Alex
     git config user.email alexmendes@mymail.com
 
-**STARTING A REPOSITORY**
+**CRIANDO NOSSO REPOSITÓRIO**
+Tendo nosso ambiente preparado com nossas configurações, é hora de criarmos o nosso repositório git. Assim sendo, criaremos um repositório que servirá para nosso primeiro projeto no git.
+Para criarmos nosso repositório de origem em nossa máquina, executaremos o comando "git init" para iniciarmos nosso repositório git local. No meu caso, antes eu criei uma estrutura de diretórios **/git/git-course**, e dentro desse diretório inicializei/executei o comando abaixo:
 
-Creating source folder in Server and enter it;
-    "git init" to start the repo.
-    
-    EX.: 
-    git init 
+    git init
     Initialized empty Git repository in /git/git-course/.git/
 
-NOTE:
+Será criado um subdiretório **.git**, dentro dele estarão armazenadas as configurações de atividades e rastreio do seu projeto.
 
-    - hooks     --> Triggers to do certain actions during the project.
-    - branch  	--> A branch in Git is simply a lightweight mobile example for one of these commits.
-    - tag	    --> The tag is just a tag, in general, on a specific branch that marks a situation at a given time.
+**CICLO DE VIDA DE ARQUIVOS NO git**
+Ao se trabalhar com o git, é importante entendermos o conceito por trás desta ferramenta de versionamento. O **git** possui um ciclo de vida desde a alteração ou inclusão de arquivos no código do repositório, lembrando que neste processo existe transições entre o local que você trabalha (suas máquinas locais) e o servidor centralizado do git (github, gitlab, bitbucket, etc). Este ciclo ou transporte de mudanças dos arquivos passa por determinados estágios:
+> << UNTRACKED > UNMODIFIED > MODIFIED > STAGED >><< UNTRACKED > UNMODIFIED > MODIFIED > STAGED >>
 
-**LIFE CYCLE OF FILES:**
+[![git - The lifecycle of the status of your files.](https://git-scm.com/book/en/v2/images/lifecycle.png "git - The lifecycle of the status of your files.")](https://git-scm.com/book/en/v2/images/lifecycle.png "git - The lifecycle of the status of your files.")
+###### 1. ciclo de vida de status dos arquivos.
 
-<< UNTRACKED > UNMODIFIED > MODIFIED > STAGED >>
+Entre os estados do git, é importante entendermos os três principais:
+1. **committed:** Estado consolidado ou popularmente "comitado".
+2. **modified:** Significa que arquivo foi modificado, mas ainda deve ser adicionado para ser comitado.
+3. **staged:** O arquivo já está preparado para o próximo commit.
+(*Caso queira entender mais sobre os estados, recomendo acessar https://git-scm.com/book/pt-br/v1/Git-Essencial-Gravando-Altera%C3%A7%C3%B5es-no-Reposit%C3%B3rio para um entendimento mais aprofundado.*)
 
-**GIT REPOSITORY STATUS**
+**GIT STATUS**
+Ok... Como saber o estado dos arquivos do meu repositório git? Simples... Executa aí:
 
     git status
-
-Nothing added to commit but untracked files present (use "git add" to track)
+	Nothing added to commit but untracked files present (use "git add" to track)
+O status acima nos sinaliza que não tem nada para ser comitado, sugerindo que adicionemos algum arquivo para commit.
 
 **ADD FILE TO GIT:**
+Agora vejamos como adicionar um arquivo para ser comitado ao nosso servidor git:
 
-    git add Readme.md
-    new file:   Readme.md
-	
-NOTE: 
-> WHENEVER THERE ARE FILE CHANGES, WE MUST USE "GIT ADD" AGAIN (BEFORE COMMIT --> TO STAGED). 
+    git add README.md
+    new file:   README.md
+Acabamos de adicionar um arquivo para que possa ser comitado **\o/**.
+
+OBS:
+> Sempre que houver alterações de arquivos, DEVEMOS USAR "git add" NOVAMENTE (antes do commit -> Staged).
 
 **GIT COMMIT**
+Chegamos ao famoso **git commit**...  Com ele registramos as mudanças no repositório.
 
-git commit - Record changes to the repository
-
-    git commit -m "Add Readme.md"
-
+    git commit -m "Add README.md"
     [master (root-commit) 661c72d] Add Readme.md
     1 files changed, 2 insertions(+), 0 deletions(-)
     create mode 100644 Readme.md
 
-**REVERTING CODE TO PREVIOUS STEP WITH git checkout AND git RESET**
+**git checkout & git reset**
+Agora aprenderemos como reverter mudanças do código para a etapa anterior:
 
-
-* **git checkout**        - It's used to steps before commit actions.
-* **git reset** <--level> - It's used to steps after commit actions.
+- **git checkout** - Ele é utilizado para reverter etapas antes de ações de commit.
+- **git reset** <--level> - Utilizado para reverter etapas depois de ações de commit.
 
 **HOW TO**
+Exemplificando:
 
-01 - BEFORE EXECUTING 'git add' (staged phase):
+01 - Antes de execução 'git add' (staged phase):
 
 (use "git checkout -- ..." to discard changes in working directory)
 
     git checkout <FILE>
 
-02 - AFTER 'git add' (staged phase (ready to commit))
+02 - Depois de 'git add' (staged phase (ready to commit))
 
 (use "git reset HEAD ..." to unstage)
 
     git reset HEAD <FILE>
 
-**A LITTLE MORE ABOUT GIT "git reset"**
+**UM POUCO MAIS DE git - "git reset"**
 
 * **git reset** levels:
  
     git reset [--mixed | --soft | --hard | --merge | --keep] [-q] []
 
 NOTE: 
-> git reset always calls the previous HASH Commit. 
+> git reset sempre faz a chamada para o HASH anterior ao commit. 
 
-**OPTIONS:**
+**DETALHAMENTO:**
 
---soft	(CANCELS COMMIT, TAKE AWAY STAGE) Does not touch the index file nor the working tree at all, but requires them to be in a good order. This leaves all your changed files "Changes to be committed", as git status would put it.
-    EX.: git reset --soft e3131b3f718e17c2014c528ba81e67dd16e232e4
+--soft *(CANCELS COMMIT, TAKE AWAY STAGE)*
+Não toca no arquivo de índice nem na árvore de trabalho, mas exige que estes estejam em boas condições. Isso deixa todos os seus arquivos no estado  "Changes to be committed".
+    EX.:
+    git reset --soft e3131b3f718e17c2014c528ba81e67dd16e232e4
 
---mixed	(CANCELS COMMIT, KEEP OUT STAGE(KEEP UNSTAGED))
-       Resets the index but not the working tree (i.e.,
-	   the changed files are preserved but not marked for commit) and reports
-       what has not been updated. This is the default action.
+--mixed *(CANCELS COMMIT, KEEP OUT STAGE(KEEP UNSTAGED))*
+Redefine o índice, mas não a árvore de trabalho (ou seja, os arquivos alterados são preservados, mas não marcados para commit) e relata o que não foi atualizado. Esta é a ação default.
 	EX.:
-	    git reset --mixed e3131b3f718e17c2014c528ba81e67dd16e232e4
+	git reset --mixed e3131b3f718e17c2014c528ba81e67dd16e232e4
 
---hard	(CANCELS COMMIT, UNDO ALL COMMIT CHANGES *)
-     Matches the working tree and index to that of the tree being switched to.
-	   "Any changes to tracked files in the working tree since <commit> are lost."
+--hard *(CANCELS COMMIT, UNDO ALL COMMIT CHANGES)*
+Corresponde a árvore de trabalho e o índice àquele da árvore que está sendo alternada.
+> "Quaisquer alterações nos arquivos "tracked" na árvore de trabalho desde o commit serão perdidas."
 
 **GIT LOGS - OPTIONS**
-***RUNNING COMMAND ON PROJECT DIRECTORY/REPOSITORY THAT YOU WANT TO CHECK OUT.**
+**git log** é o nosso visualizador de históricos de ações e mudanças ocorridas no nosso repositório git.
+***Executar o comando no DIRETÓRIO/REPOSITÓRIO de trabalho (onde contém o .git/)***
 
     git log
     commit 661c72d4470e6c59bb38e23e1af5eaae716d0baaxX
     Author: Alex <alexmendes@mymail.com>
     Date:   Mon Nov 5 23:36:04 2018 -0200
 
-**LOG DETAILS**
+**RECURSOS DO git log**
 
     git log --decorate
     commit 661c72d4470e6c59bb38e23e1af5eaae716d0baaxX (HEAD, master)
@@ -115,11 +127,11 @@ NOTE:
     
     Add Readme.md
 
-**LOG - FILTER BY AUTHOR**
+**LOG - FILTRO POR AUTOR**
 
     git log --author="Alex"
 
-**LOG WITH COLABORATORS**
+**LOG BREVE COM shortlog**
 
     git shortlog
     Alex (2):
@@ -130,7 +142,7 @@ NOTE:
     git shortlog -sn
 	2  Alex
 
-**GRAPH LOG**
+**LOG COM ÁRVORE GRÁFICA**
 
     git log --graph
         * commit ec98347a9312a0ec51c2967546ca48ba42c5a65cxX
@@ -145,7 +157,7 @@ NOTE:
 
 	Add Readme.md
 
-**CHANGING DETAILS**
+**DETALHAMENTO PELA HASH DO commit**
 
     git show <HASH_COMMIT>
 
@@ -156,7 +168,7 @@ NOTE:
 
 	Add Readme.md
 
-**GETTING DIFFERENCES AND CHANGES**
+**OBTENDO ALTERAÇÕES COM O diff**
 
     git diff
 
@@ -188,42 +200,50 @@ NOTE:
     +
     Basic Study Repo GIT/GITHUB.
 
-**GIT NAME ONLY**
+**OBTENDO ALTERAÇÕES SOMENTE PELO NOME**
 
     git diff --name-only
     	Readme.md
 
-**WORKING WITH REMOTE REPOS.**
+**TRABALHANDO COM REPOSITÓRIOS REMOTOS**
+Até aqui foi visto o git de forma local, levando em consideração enviar alterações e novo conteúdo de nossa máquina local para o servidor remoto. É hora de aprendermos o contrário...
+Então tá! Mas como faço para atualizar meu repositório local a partir do meu repositório remoto?
 
-Create a new repository on the command line
+Vamos criar um novo repositório adicionando um README.md:
 
-    echo "# git-course" >> README.md
-    git init git add README.md
-    git commit -m "first commit"
-    git remote add origin git@github.com:alexmbarbosa/git-course.git git push -u origin master
+    git init
+	echo "# git-course" >> README.md
+	git add README.md
+	git commit -m "first commit"
+	git remote add origin git@github.com:alexmbarbosa/git-course.git 
+	git push -u origin master
+Aqui nós iniciamos um repositório git, adicionamos um arquivo README.md com uma linha "# git-course", fizemos o commit. O "git remote add origin" quer dizer que adicionamos essa nossa nova mudança para um repositório já existente no github (git-course.git). A seguir iremos entender como checar essas mudanças (git remote -v). Então fica calmo! ;)
 
-Push an existing repository from the command line
+Fazendo um "push" para um repositório existente da nossa linha de comando:
 
     git remote add origin git@github.com:alexmbarbosa/git-course.git
     git push -u origin master
+No git push, estamos "empurrando" nossas modificações para esse repositório na Branch **master** (veremos branches mais pra frente).
 
-**CHECKING FOR REPOSITORY EXISTENCE**
+**CHECANDO A EXISTÊNCIA DE UM REPOSITÓRIO**
 
     git remote show origin <- Output Command.
 
 **VERBOSE MODE**
+Tú lembras que falei sobre como checar essas mudanças remotas? Então, vamos digitar:
 
     git remote -v
 
     origin git@github.com:alexmbarbosa/git-course.git (fetch)
     origin git@github.com:alexmbarbosa/git-course.git (push)
 
-**RECEIVING CODE FROM REMOTE REPO TO LOCAL REPO**
+**RECEBENDO MUDANÇAS DE CÓDIGO DE UM REPOSITÓRIO**
+Agora vamos aprender o inverso... Trazer as mudanças de um repositório remoto para nosso repositório local. Isso sempre será necessário quando outros usuários fizerem outras alterações no repositório remoto. Aí então teremos que atualizar nosso repositório local para posteriormente enviar nossos commits.
 
     git pull [<options>] [<repository> [<refspec>…]]
 
-git pull incorporates changes from a remote repository into the current branch.
-In its default mode, git pull is shorthand for git fetch followed by git merge FETCH_HEAD.
+O comando git pull incorpora  mudanças de um repositório remoto na branch atualmente em uso.
+***Em seu modo padrão, git pull é uma abreviação de git fetch, seguida por git merge FETCH_HEAD***. Mas isso é outra história que requer maior aprofundamento (segue a dica de leitura: https://git-scm.com/book/pt-br/v1/Git-Essencial-Trabalhando-com-Remotos).
 
     git pull
     remote: Enumerating objects: 17, done.
@@ -231,18 +251,20 @@ In its default mode, git pull is shorthand for git fetch followed by git merge F
     remote: Compressing objects: 100% (10/10), done.
     remote: Total 15 (delta 5), reused 0 (delta 0)
     Unpacking objects: 100% (15/15), done.
-    From http://zabhx02b/ga/git-course
+    From http://github.com/ga/git-course
        ca066cb..c3de5a7  master     -> origin/master
     Updating ca066cb..c3de5a7
     Fast-forward
      README.md | 13 +++++++++++--
      1 file changed, 11 insertions(+), 2 deletions(-)
 
-**CLONING git PROJECTS**
+**CLONANDO PROJETOS git**
+Uma coisa que todo sysadmin já fez na vida, mesmo que ainda não tenha utilizado aprofundadamente o git, foi fazer um tal **git clone** de algum projeto por aí... Então vamos entender o que é isso.
 
-git clone - Clone a repository into a new diretory.
+**git clone** - Clona um repositório de um projeto remoto para um novo diretório local. Geralmente usado quando você precisa puxar um repositório de um projeto remoto para sua máquina, afim de trabalhar nele ou até mesmo utilizá-lo para algum fim.
 
 **git clone PROTOCOLS**
+Com o git clone, é possível trabalhar com alguns protocolos, além do próprio git:
 
     * ssh://[user@]host.xz[:port]/path/to/repo.git
     * git://host.xz[:port]/path/to/repo.git
@@ -253,187 +275,179 @@ Example:
 
     git clone user@host.xz:path/to/repo.git/
 
-**UNDERSTANDING FORK CONCEPTS**
-
-A fork is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project.
-Most commonly, forks are used to either propose changes to someone else's project or to use someone else's project as a starting point for your own idea.
+**COMPREENDENDO CONCEITOS DE  "FORK"**
+**fork** é uma cópia de um repositório existente. O fork de um repositório permite fazer uma cópia de um repositório de alguém sem afetar o projeto original.
+Geralmente, forks são usados para propor alterações no projeto de outra pessoa ou para usar o projeto de outra pessoa como ponto de partida para sua própria idéia.
 
 ![alt text](https://help.github.com/assets/images/help/repository/fork_button.jpg)
+######2. Barra com a option FORK.
 
-**WHAT IS A BRANCH?**
+**O QUE É BRANCH?**
+**Branches** são ponteiros para um instantâneo de suas alterações. Quando você deseja adicionar um novo recurso ou corrigir um erro - não importa quão grande ou pequeno - você gera uma nova ramificação (gera um branch) para encapsular suas alterações. É uma maneira de proteger seu projeto de grandes e significativas mudanças que podem causar impacto no conteúdo projeto de uma maneira geral.
+Isso dificulta a mesclagem do código instável na base de código principal e oferece a oportunidade de limpar o histórico futuro antes de mesclá-lo na branch principal (branch master).
 
-Git branches are effectively a pointer to a snapshot of your changes. When you want to add a new feature or fix a bug—no matter how big or how small—you spawn a new branch to encapsulate your changes. 
-This makes it harder for unstable code to get merged into the main code base, and it gives you the chance to clean up your future's history before merging it into the main branch.
-
-git-branch - List, create, or delete branches.
-The git branch command lets you create, list, rename, and delete branches.
+**COMANDO git branch**
+**git branch** - Lista, cria, ou deleta branches.
+Com este comando vamos criar, listar, renomear e deletar branches.
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:746be214-eb99-462c-9319-04a4d2eeebfa/01.svg)
+######3. Árvore de branches
 
-It doesn’t let you switch between branches or put a forked history back together again. 
-For this reason, git branch is tightly integrated with the git checkout and git merge commands.
+git branch não permite alternar entre as branches ou reunir um histórico de um fork anterior novamente. Por esta razão o git branch está fortemente integrado com os comandos **git checkout** e **git merge** (que veremos em seguida).
 
 **git branch COMMON OPTIONS**
-
-List all of the branches in your repository. This is synonymous with git branch --list.
+Lista todos os branches em seu repositório. Este é o sinônimo de **git branch --list**.
 
     git branch
 
-Create a new branch called <branch>. This does not check out the new branch.
+Abaixo criaremos uma branch <branch>:
 
-    git branch <branch>
+	git branch <branch>
 
-Delete the specified branch. This is a “safe” operation in that Git prevents you from deleting the branch if it has unmerged changes.
+Com a opção **-d** nós deletamos a branch.
+Esta é uma operação "segura", pois o git nos impede que excluemos  a branch se houver mudanças nela "não mergeadas".
 
     git branch -d <branch>
 
-Force delete the specified branch, even if it has unmerged changes. This is the command to use if you want to permanently throw away all of the commits associated with a particular line of development.
+Com a opção **-D** é possível *forçar o delete* da branch especificada. Só use esse comando se você realmente deseja descartar todos os commits associados à ele na linha de desenvolvimento: 
 
     git branch -D <branch>
 
-Deleting remote branches in git. To delete a remote branch, we do not use the "git branch" command - but instead "git push" with the "--delete" flag:
+**DELETANDO BRANCHES REMOTAS**
+Agora vamos deletar branches remotas em nosso git. Para deletar uma branch remota, nós não usaremos o comando **git branch**, ao invés disso, usaremos o **git push** com a flag --delete: 
 
     git push <remote_name> :<branch_name>
     git push origin --delete feature/login
-    
-Rename the current branch to <branch>.
 
-    git branch -m <branch>
+Renomeia a branch atual para <era1branch>:
+    git branch -m <era1branch>
 
-List all remote branches.
-
+Liste todas as branches remotas:
     git branch -a
-    
-Create a new branch <new> referencing <start-point>, and check it out.
 
-    git checkout -b <new> <start-point>
-    
-**NOTES ABOUT BRANCHES**
+Crie uma nova branch <newbranch> referenciando <start-point>, and confira:
+    git checkout -b <newbranch> <start-point>
 
-If you are creating a branch that you want to checkout immediately, it is easier to use the git checkout command with its -b option to create a branch and check it out with a single command.
+**NOTAS IMPORTANTES SOBRE BRANCHES**
+Se você criar uma branch que você queira fazer checkout imediatamente, é só usar o comando **git checkout -b**. A opção **-b** cria a nova branch e já te coloca nela. **;)**
+As opções **--contains, --no-contains, --merged and --no-merged** servem para 4 diferentes propósitos:
+    **--contains <commit>** é usada para encontrar todos branches que precisarão de atenção especial se <commit> estiver em status "rebased ou amended", desde que os  branches contenham o <commit> especificado.
+    **--no-contains <commit>** é o inverso disso, ou seja, branches que não contenham a <commit> especificada.
+    **--merged** é usada para encontrar todas branches que possam ser excluídas com segurança, desde que estas estejam totalmente contidas por **HEAD**.
+    --no-merged é usada para encontrar branches que estão candidatadaspara merge pelo **HEAD**, desde que não estejam totalmente contidas pelo **HEAD**.
 
-The options --contains, --no-contains, --merged and --no-merged serve four related but different purposes:
+**MANIPULANDO BRANCHES**
+**git checkout** - Alterna branches ou restaura arquivos na árvore de trabalho.
 
-    --contains <commit> is used to find all branches which will need special attention if <commit> were to be rebased or amended, since those branches contain the specified <commit>.
-    --no-contains <commit> is the inverse of that, i.e. branches that don’t contain the specified <commit>.
-    --merged is used to find all branches which can be safely deleted, since those branches are fully contained by HEAD.
-    --no-merged is used to find branches which are candidates for merging into HEAD, since those branches are not fully contained by HEAD.
-    
-**HANDLING BRANCHES**
-
-git checkout - Switch branches or restore working tree files.
-
-Updates files in the working tree to match the version in the index or the specified tree. If no paths are given, git checkout will also update HEAD to set the specified branch as the current branch.
-
+O **git checkout** atualiza nossa árvore de arquivos, correspondendo com a versão do índice ou árvore especificada. Se nenhum caminho for fornecido, o git checkout também fará um update no HEAD, definirá a branch especificada como o branch atual
     git checkout <branch>
 
-To prepare for working on <branch>, switch to it by updating the index and the files in the working tree, and by pointing HEAD at the branch. 
-Local modifications to the files in the working tree are kept, so that they can be committed to the <branch>.
-
-If <branch> is not found but there does exist a tracking branch in exactly one remote (call it <remote>) with a matching name, treat as equivalent to:
-
+Para se preparar para trabalhar no <branch>, alterne para ele atualizando o índice e os arquivos na árvore de trabalho e pelo apontamento da HEAD na branch.
+As modificações locais nos arquivos da árvore de trabalho são mantidas, para que possam ser confirmadas no <branch>.
+Se o <branch> não for encontrado mas existir uma branch rastreada no repositório remoto, nós chamaremos a branch remota <remote> referindo-se ao nome dessa branch:
     git checkout -b <branch> --track <remote>/<branch>
-	
-Specifying -b causes a new branch to be created as if git branch were called and then checked out.
 
+Especificar **-b** culminará em uma nova branch a ser criada como se o **git branch** fosse chamado e então verificado em seguida.
     git checkout -b|-B <new_branch> [<start point>]
 
-If -B is given, <new_branch> is created if it doesn’t exist; otherwise, it is reset.
+Se -B for dado, <new_branch> será criada caso esta não exista; de outra forma será resetada.
 
-**JOIN BRANCHES**
-
-There are two different ways for joining branches:
-- git merge
-- git rebase
+**UNINDO BRANCHES**
+Existem 2 maneiras diferentes de unir branches. Elas são:
+-   git merge
+-   git rebase
 
 **git merge**
-
-git merge will combine multiple sequences of commits into one unified history. In the most frequent use cases, git merge is used to combine two branches. The following examples in this document will focus on this branch merging pattern. In these scenarios, git merge takes two commit pointers, usually the branch tips, and will find a common base commit between them.
+**git merge** irá combinar múltiplas sequências de commits num histórico unificado. Na maioria dos casos, o **git merge** geralmente é utilizado para combinar duas branches. Nos exemplos a seguir, veremos uma espécia de merging pattern, nestes cenários teremos dois ponteiros de commits, indo para uma base em comum entre eles:
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:86eba9ec-9391-45ea-800a-948cec1f2ed7/Branch-2.png)
+######4.Um exemplo de git merge.
 
-Invoking this command will merge the specified branch feature into the current branch, we'll assume master. Git will determine the merge algorithm automatically (discussed below).
+Invocando este comando ele fará o merge da feature branch especificada na branch atual, assumindo a master. O git determinará o algoritmo de mesclagem automaticamente:
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:83323200-3c57-4c29-9b7e-e67e98745427/Branch-1.png)
+######5.Um exemplo de git merge.
 
-Merge commits are unique against other commits in the fact that they have two parent commits. When creating a merge commit Git will attempt to auto magically merge the separate histories for you.
+**merge commits** são únicas em relação a outras no fato de terem dois commits pais. Ao criar um merge consolidado, o git tentará mesclar automaticamente os históricos separados para você.
 
-**git merge - BEFORE AND AFTER**
+**git merge - ANTES E DEPOIS**
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:91b1bdf5-fda3-4d20-b108-0bb9eea402b2/08.svg)
+######6.git merge (antes e depois).
 
-In example above it demonstrates a fast-forward merge. The code below creates a new branch, adds two commits to it, then integrates it into the main line with a fast-forward merge.
+O código abaixo cria uma nova branch, adiciona dois commits e a integra à linha principal com uma merge "fast-forward".
 
-    # Start a new feature
+    # Iniciar uma nova feature:
     git checkout -b new-feature master
-    # Edit some files
+    # Editar alguns arquivos, add e comitar:
     git add <file>
     git commit -m "Start a feature"
-    # Edit some files
+    # Editar alguns arquivos, add e comitar:
     git add <file>
     git commit -m "Finish a feature"
-    # Merge in the new-feature branch
+    # Fazer merge numa nova feature branch:
     git checkout master
     git merge new-feature
     git branch -d new-feature
 
-**MERGING WITH git merge**
-
-A merge happens when combining two branches. Git will take two (or more) commit pointers and attempt to find a common base commit between them.
+**"MERGING" com git merge**
+Como vimos, **merge** acontece ao combinarmos duas branches. O git pegará dois (ou mais) ponteiros de commits e tentará encontrar uma base comum entre eles.
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:e229fef6-2c2f-4a4f-b270-e1e1baa94055/02.svg)
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:2d3aef7f-6e1d-4e39-a5a5-97dd7714fdd2/what-is-a-merge.gif)
 
 **git rebase**
-
-Rebasing is the process of moving or combining a sequence of commits to a new base commit. Rebasing is most useful and easily visualized in the context of a feature branching workflow. The general process can be visualized as the following:
+Vimos bastante sobre o git merge, agora vamos entrar no **git rebase**. "Rebasing" é o processo de mover ou combinar uma sequência de commits *para uma nova base commit*. Ele é mais útil e facilmente visualizado no contexto de uma *feature branching workflow* (neste conceito, um novo branch é criado para cada nova feature). Este workflow será visto a seguir:
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:e4a40899-636b-4988-9774-eaa8a440575b/02.svg)
+######7. git rebase
 
-From a content perspective, rebasing is changing the base of your branch from one commit to another making it appear as if you'd created your branch from a different commit. Internally, Git accomplishes this by creating new commits and applying them to the specified base.
-It's very important to understand that even though the branch looks the same, it's composed of entirely new commits.
+De uma perspectiva de conteúdo, o rebasing está alterando a base de sua branch de um commit para outro, fazendo parecer que você criou sua branch a partir de um commit diferente. Internamente, o git realiza isso criando novos commits e aplicando-os à base especificada.
+*É muito importante entender que, embora a *branch* pareça a mesma, ela é composta de commits novos*.
 
-**The Rules about git rebase**
+**AS REGRAS DO git rebase**
+Rebase tem a vantagem de que não há outros novos merges commits criados, confundindo o meio de campo. No entanto, como o HEAD não é um descendente de um pre-rebase HEAD comitado, o rebasing pode ser problemático. **Tentando esclarecer**, o **git rebase** tem a vantagem de *não criar um novo commit para "mergear" ("commit de merge")*.
 
-Rebase has the advantage that there is no merge commit created. However, because HEAD is not a descendant of the pre-rebase HEAD commit, rebasing can be problematic.
+Mas como nem tudo são flores, deve-se tomar cuidado com o rebase... 
 
-- Rule One: Never Rebase Public Branches
-- Rule Two: Committing When Branch Change on Remote
+**PREVENINDO PROBLEMAS COM git rebase**
+- REGRA 1: Nunca faça rebase que foi enviado pararepositórios públicos.
+- REGRA 2: Comitar  quando a branchmuda no repositório remoto.
 
-The example below combines git rebase with git merge to maintain a linear project history. This is a quick and easy way to ensure that your merges will be fast-forwarded.
+O exemplo a seguir combina o **git rebase** com o **git merge** para manter o histórico do projeto linear:
 
-    # Start a new feature
+    # Inicie uma new feature
     git checkout -b new-feature master
-    # Edit files
+    # Edite os arquivos
     git commit -a -m "Start developing a feature"
 
-In the middle of our feature, we realize there’s a security hole in our project:
+No meio da nossa feature, 
+In the middle of our feature, percebemos que há uma falha de segurança em nosso projeto:
 
-    # Create a hotfix branch based off of master
+    # Criamos uma branch "hotfix" baseada nanossa  branch "master"
     git checkout -b hotfix master
-    # Edit files
+    # Editamos arquivos
     git commit -a -m "Fix security hole"
-    # Merge back into master
+    # Fazemos o merge novamente na branch master
     git checkout master
     git merge hotfix
     git branch -d hotfix
-
-After merging the hotfix into master, we have a forked project history. Instead of a plain git merge, we’ll integrate the feature branch with a rebase to maintain a linear history:
+Após o merge da branch hotfix para a master, nós temos uma cópia do histórico de nosso projeto. Ao invés de usarmos o git merge nós integraremos a feature branch com o git rebase, mantendo o histórico linear:
 
     git checkout new-feature
     git rebase master
 
-This moves new-feature to the tip of master, which lets us do a standard fast-forward merge from master:
+Isso move a nova feature para a ponta da branch master, o que nos permite fazer uma mesclagem de fast-forward padrão na master:
 
     git checkout master
     git merge new-feature
 
-**GIT RECAPPING: MERGE vs REBASE**
+**RECAPITULANDO: MERGE vs REBASE**
 
 **Merging**
 
-When you run git merge, your HEAD branch will generate a new commit, preserving the ancestry of each commit history.
+Quando você executa o **git merge**, sua branch HEAD gera um novo commit, preservando a ancestralidade de cada histórico de commit.
 
 ![alt text](https://storage.kraken.io/kk8yWPxzXVfBD3654oMN/673b91456bdc6fd454c5ad203f825568/git-merge-2.png)
 
@@ -456,40 +470,42 @@ The rebase re-writes the changes of one branch onto another without creating a n
 For every commit that you have on the feature branch and not in the master, a new commit will be created on top of the master. It will appear as if those commits were written on top of master branch all along.
 
 ![alt text](https://storage.kraken.io/kk8yWPxzXVfBD3654oMN/5ade4f7276bc6ad18dad4b6078950ac9/git-rebase.png)
+######8.git merge.
 
 Pros:
 
-1- Simplifies your history and visual charts.
+1- Simplifica seu histórico e gráficos visuais.
 
 Cons:
 
-1- In Git, you may push commits you may want to rebase later (as a backup) but only if it’s to a remote branch that only you use. If anyone else checks out that branch and you later rebase it, it’s going to get very confusing.
-2- Each commit is rebased in order, and a conflict will interrupt the process of rebasing multiple commits. With a conflict, you have to resolve the conflict in order to continue the rebase.
+1. No Git, você pode enviar commits por push que você deseja um rebase posteriormente (como backup), mas apenas se for para uma branch remota que *somente você usa*. Se alguém fizer um checkout nessa branch e você querer o rebase posteriormente, isso ficará *muito confuso*.
 
-**git merge OR git rebase? Which one should I use?**
+2. Cada commit é reorganizada em ordem e um conflito interromperá o processo de reestruturação múltipla. havendo um conflito, você deve resolvê-lo primeiro para continuar o rebase.
 
-Following factors should be considered when choosing which operation to use:
+**git merge ou git rebase? Qual devo usar?**
 
-1- If you are planning to re-integrate a completed feature branch, use merge.
-2- If you have already pushed the branch you are working on, then you should not rebase but merge instead. For branches that have not been pushed, rebase, test and merge.
-3- If you are working on a shared branch or an open source project along with many other developers outside of your team, don’t rebase. Since rebase destroys the branch and other developers will have inconsistent repositories.
-4- If you think there is a chance you will want to revert some changes then use merge, since reverting a rebase is considerably difficult as compared to reverting a merge.
+Os seguintes fatores devem ser considerados ao optar por uma dessas opções:
+1. Se você planeja reintegrar uma feature branch completa, *use merge*.
+2. Se você já empurrou (push) a branch na qual está trabalhando, então *não deve usar rebase e sim o merge*. Para branches que não foram enviadas, *rebase, test e merge*.
+3. Se você estiver trabalhando em uma branch compartilhada ou em um projeto open source, juntamente com muitos outros desenvolvedores fora da sua equipe, *não use rebase*. Já que o rebase destruirá branches de outros desenvolvedores acarretando em  repositórios inconsistentes.
+4. Se você acha que há uma chance de querer reverter algumas alterações, *use merge*, pois reverter um *rebase é consideravelmente difícil em comparação com a reversão de merge*.
 
 **.gitignore**
-
-gitignore - Specifies intentionally untracked files to ignore.
+Geralmente em nossos repositórios, geralmente existem algums arquivos que não devem ou não faz nenhum sentido que sejam enviados para nosso repositório remoto, como arquivos binários ou até mesmo arquivos confidenciais (contendo registros de passwords). É para isso que existe o **gitignore**. 
+**gitignore** - Especifica arquivos que não devem ser rastreados para envio ao repositório remoto (devem ser *ignorados*).
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:75f75cb6-a6ab-4f0b-ab29-e366914f513c/hero.svg)
+######9.gitignore
 
-A gitignore file specifies intentionally untracked files that Git should ignore. Files already tracked by Git are not affected; see the NOTES below for details.
+O git enxerga todos os arquivos em sua cópia de trabalho como uma das três coisas:
 
-git sees every file in your working copy as one of three things:
-
-- tracked - a file which has been previously staged or committed;
-- untracked - a file which has not been staged or committed;
-- ignored - a file which Git has been explicitly told to ignore.
+- tracked - um arquivo que foi previamente para estado **staged ou commited**;
+- untracked - um arquivo que não foi para estado **staged ou commited**;
+- ignored - um arquivo que o git foi instruído a ignorar.
 
 This Example below in order to exclude everything except a specific directory foo/bar (note the /* - without the slash, the wildcard would also exclude everything within foo/bar):
+
+O exemplo abaixo tem como objetivo ignorar tudo, com exceção do diretório **foo/bar**:
 
     $ cat .gitignore
     # exclude everything except directory foo/bar
@@ -498,17 +514,13 @@ This Example below in order to exclude everything except a specific directory fo
     /foo/*
     !/foo/bar
     
-**NOTES**
-
-> The purpose of gitignore files is to ensure that certain files not tracked by Git remain untracked.
-> To stop tracking a file that is currently tracked, use git rm --cached.
-
+**NOTA:**
+> Ratificando, o propósito do arquivo .gitignore é garantir que certos arquivos não rastreados pelo git *permaneçam não rastreados*.
+> Para parar de rastrear um arquivo atualmente rastreado, use **git rm --cached**.
 
 **git stash**
-
-git stash - Stash the changes in a dirty working directory away.
-
-Use git stash when you want to record the current state of the working directory and the index, but want to go back to a clean working directory. The command saves your local modifications away and reverts the working directory to match the HEAD commit.
+git stash - Sua função como sugere o **https://git-scm.com** é tirar o estado sujo do seu diretório de trabalho — isto é, seus arquivos modificados que estão sendo rastreados e mudanças na área de seleção — e o salva em uma pilha de modificações inacabadas que você pode voltar a qualquer momento.
+Use git stash quando desejar gravar o estado atual do diretório de trabalho e do índice, mas desejar voltar para um diretório limpo. O comando salva suas modificações locais e reverte o diretório de trabalho para corresponder ao commit HEAD.
 
     $ git status
     On branch master
@@ -523,41 +535,37 @@ Use git stash when you want to record the current state of the working directory
     On branch master
     nothing to commit, working tree clean
 
-At this point you're free to make changes, create new commits, switch branches, and perform any other Git operations; then come back and re-apply your stash when you're ready.
+Nesse ponto, você é livre para fazer alterações, criar novos commits, alternar branches e executar quaisquer outras operações do git; volte e aplique novamente o seu stash quando estiver pronto.
 
-**Tip Stash**
-**Recovering stash entries that were cleared/dropped erroneously**
+**Dicas para uso do git stash**
 
-If you mistakenly drop or clear stash entries, they cannot be recovered through the normal safety mechanisms. However, you can try the following incantation to get a list of stash entries that are still in your repository, but not reachable any more:
+>Se você dropar ou limpar as entradas stash por engano, elas não poderão ser recuperadas pelos mecanismos de segurança normais. No entanto, você pode tentar o seguinte método para obter uma lista de entradas stash que ainda estão no seu repositório, mas que não são mais acessíveis:
 
     git fsck --unreachable |
     grep commit | cut -d\  -f3 |
     xargs git log --merges --no-walk --grep=WIP
 
-**Git Aliases**
-
-Alias provides easily set up an alias for each command using git config. Here are a couple of examples you may want to set up:
+**git aliases**
+**git alias** fornece facilmente um alias para cada comando usando o git config. Aqui estão alguns exemplos que você pode querer configurar:
 
     $ git config --global alias.co checkout
     $ git config --global alias.br branch
     $ git config --global alias.ci commit
     $ git config --global alias.st status
 
-**Git Tagging**
+**git tag**
+Eis aqui um recurso muito útil e importante, também muito utilizado entre os utilizadores que mantém as boas práticas em seus códigos. O git tem a capacidade de marcar pontos específicos no histórico de um repositório como sendo importantes. Normalmente, as pessoas usam essa funcionalidade para marcar pontos de releases (v1.0, v2.0 e assim por diante). Nesta seção, você aprenderá como listar tags existentes, como criar e excluir tags e quais são os diferentes tipos de tags.
 
-Git has the ability to tag specific points in a repository’s history as being important. Typically, people use this functionality to mark release points (v1.0, v2.0 and so on). In this section, you’ll learn how to list existing tags, how to create and delete tags, and what the different types of tags are.
-
-**Listing Your Tags**
-
-Listing the existing tags in Git is straightforward. Just type git tag (with optional -l or --list):
+**LISTANDO TAGS**
+Listar as tags existentes no git é bem simples. Basta digitar git tag (com opcional -l ou --list):
 
     $ git tag
     v1.0
     v2.0
 
-This command lists the tags in alphabetical order; the order in which they are displayed has no real importance.
+>Este comando lista as tags em ordem alfabética; a ordem em que são exibidas não tem importância real.
 
-You can also search for tags that match a particular pattern. The Git source repo, for instance, contains more than 500 tags. If you’re interested only in looking at the 1.8.5 series, you can run this:
+Você também pode procurar por tags que correspondam a um padrão específico. O repositório de origem do git, por exemplo, contém mais de 500 tags. Se você estiver interessado apenas em buscar a release 1.8.5, execute:
 
     $ git tag -l "v1.8.5*"
     v1.8.5
@@ -566,16 +574,14 @@ You can also search for tags that match a particular pattern. The Git source rep
     v1.8.5.1
     v1.8.5.3
 
-**Creating Tags**
+**CRIANDO TAGS**
+git suporta 2 tipos de tags: **lightweight and annotated.**
+Uma lightweight tag é muito parecida com uma branch que não muda. É apenas um ponteiro para um commit específico.
 
-Git supports two types of tags: lightweight and annotated.
+Annotated tags, no entanto, são armazenadas como objetos completos no banco de dados do git. Eles são contém o nome, o email e a data do marcador; possuem uma mensagem de marcação; e podem ser assinados e verificados com o GNU Privacy Guard (GPG). Geralmente, é recomendável que você crie tags anotadas para ter todas essas informações; mas se você deseja uma tag temporária ou, por algum motivo, não deseja manter as outras informações, é só usar a lightweight tag.
 
-A lightweight tag is very much like a branch that doesn’t change?—?it’s just a pointer to a specific commit.
-
-Annotated tags, however, are stored as full objects in the Git database. They’re checksummed; contain the tagger name, email, and date; have a tagging message; and can be signed and verified with GNU Privacy Guard (GPG). It’s generally recommended that you create annotated tags so you can have all this information; but if you want a temporary tag or for some reason don’t want to keep the other information, lightweight tags are available too.
-
-**Annotated Tags**
-Creating an annotated tag in Git is simple. The easiest way is to specify -a when you run the tag command:
+**ANNOTATED TAGS**
+Criar uma tag anotada no git também é bem simples. A maneira mais fácil é especificá-la quando você executar o comando git tag:
 
     $ git tag -a v1.4 -m "my version 1.4"
     $ git tag
@@ -583,70 +589,70 @@ Creating an annotated tag in Git is simple. The easiest way is to specify -a whe
     v1.3
     v1.4
 
-The -m specifies a tagging message, which is stored with the tag. If you don’t specify a message for an annotated tag, Git launches your editor so you can type it in.
+The -m especifica uma "tagging message", a qual é armazenada com a tag. Se você não especificar uma mensagem para a tag, o git lança seu editor para que você possa digitá-lo.
 
-**Deleting Tags**
-To delete a tag on your local repository, you can use git tag -d <tagname>. For example, we could remove our lightweight tag above as follows:
+**DELETANDO TAGS**
+Para excluir uma tag no seu repositório local, você pode usar **git tag -d <tagname>**. Por exemplo, podemos remover nossa tag acima, da seguinte maneira:
 
     $ git tag -d v1.4-lw
     Deleted tag 'v1.4-lw' (was e7d5add)
 
-Note that this does not remove the tag from any remote servers. There are two common variations for deleting a tag from a remote server.
+Observe que isso não remove a tag de nenhum servidor remoto. Existem duas variações comuns para excluir uma tag de um servidor remoto.
+A maneira de interpretar o exposto acima é lê-lo como o valor nulo antes que os dois pontos sejam empurrados para o nome do tag remoto, excluindo-o efetivamente.
 
-The way to interpret the above is to read it as the null value before the colon is being pushed to the remote tag name, effectively deleting it.
-
-The second (and more intuitive) way to delete a remote tag is with:
+A segunda maneira (e mais intuitiva) para deletar uma tag remota:
 
     $ git push origin --delete <tagname>
 
-In order to delete remote tags, the first variation is: 
+Para excluir tags remotas, a primeira variação é:
 
     git push <remote> :refs/tags/<tagname>:
     $ git push origin :refs/tags/v1.4-lw
     To /git@github.com:schacon/simplegit.git
         - [deleted]         v1.4-lw
 
-Other alternative:
+E a segunda:
 
     git push --delete origin tagname
     git tag -d tagname
 
 **git revert**
 
-git revert - Revert some existing commits.
+git revert - Utilizado para reverter alguns commits existentes.
 
-Given one or more existing commits, revert the changes that the related patches introduce, and record some new commits that record them. 
-This requires your working tree to be clean (no modifications from the HEAD commit).
-
-The git revert command can be considered an 'undo' type command, however, it is not a traditional undo operation. Instead of removing the commit from the project history, it figures out how to invert the changes introduced by the commit and appends a new commit with the resulting inverse content.
+Dado um ou mais commits existentes, reverta as alterações introduzidas pelos patches relacionados e registre alguns novos commits que as registrem.
+Isso requer que sua árvore de trabalho esteja limpa (nenhuma modificação do commit HEAD).
+O comando git revert pode ser considerado um "undo", no entanto, não é uma operação undo tradicional. Em vez de remover a confirmação do histórico do projeto, ele descobre como inverter as alterações introduzidas pelos commits e anexa um novo commit com o conteúdo inverso resultante.
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:b6fcf82b-5b15-4569-8f4f-a76454f9ca5b/03%20(7).svg)
+######10.git revert.
 
-**git revert examples:**
-
-Revert the changes specified by the fourth last commit in HEAD and create a new commit with the reverted changes.
+**git revert exemplos:**
+Revertendo alterações especificadas pelo quarto último commit no HEAD e criando um novo commit com as alterações revertidas:
 
 	git revert HEAD~3
 
-Revert the changes done by commits from the fifth last commit in master (included) to the third last commit in master (included), but do not create any commit with the reverted changes. The revert only modifies the working tree and the index.
+Revertendo as alterações feitas por commits do quinto último commit na branch master (incluída) para o terceiro último commit em master (incluída), mas não cria nenhum commit com as alterações revertidas. A reversão modifica apenas a árvore de trabalho e o índice.
 
 	git revert -n master~5..master~2
 	
 **Resetting vs Reverting**
 
-It's important to understand that git revert undoes a single commit—it does not "revert" back to the previous state of a project by removing all subsequent commits. 
-In Git, this is actually called a reset, not a revert.
+É importante entender que o git revert desfaz um único commit - ele não "reverte" de volta ao estado anterior de um projeto, removendo todos os commit subsequentes.
+*No git, isso é chamado de reset, e não revert, ok?*
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:a6a50d78-48e3-4765-8492-9e48dec8fd2f/04%20(2).svg)
+######11.git revert
 
+Bem, por enquanto é isso!
 
-    
-**REFERENCES:**
+**REFERÊNCIAS:**
 
-	- <https://pt.stackoverflow.com/questions/80583/qual-%C3%A9-a-diferen%C3%A7a-entre-um-branch-e-uma-tag>
 	- <https://git-scm.com/book/pt-br/v1/Ramifica%C3%A7%C3%A3o-Branching-no-Git-O-que-%C3%A9-um-Branch>
 	- <https://www.udemy.com/git-e-github-para-iniciantes>
+	- <https://git-scm.com/book/pt-br/v1/Primeiros-passos-No%C3%A7%C3%B5es-B%C3%A1sicas-de-Git>
 	- <https://br.atlassian.com/git/tutorials/>
 	- <https://git-scm.com/docs/user-manual.htmlh>
-    - <http://ndpsoftware.com/git-cheatsheet.html>
-    - <https://www.git-tower.com/learn/git/faq/delete-remote-branch>
+    	- <http://ndpsoftware.com/git-cheatsheet.html>
+    	- <https://www.git-tower.com/learn/git/faq/delete-remote-branch>
+	- <https://pt.stackoverflow.com/questions/80583/qual-%C3%A9-a-diferen%C3%A7a-entre-um-branch-e-uma-tag>
