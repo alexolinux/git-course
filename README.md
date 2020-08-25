@@ -31,7 +31,7 @@ Será criado um subdiretório **.git**, dentro dele estarão armazenadas as conf
 
 **CICLO DE VIDA DE ARQUIVOS NO git**
 
-Ao se trabalhar com o git, é importante entendermos o conceito por trás desta ferramenta de versionamento. O **git** possui um ciclo de vida desde a alteração ou inclusão de arquivos no código do repositório, lembrando que neste processo existe transições entre o local que você trabalha (suas máquinas locais) e o servidor centralizado do git (github, gitlab, bitbucket, etc). Este ciclo ou transporte de mudanças dos arquivos passa por determinados estágios:
+Ao se trabalhar com o git, é importante entendermos o conceito por trás desta ferramenta de versionamento. O **git** possui um ciclo de vida desde a alteração ou inclusão de arquivos no código do repositório, lembrando que neste processo existem transições entre o local que você trabalha (suas máquinas locais) e o servidor centralizado do git (github, gitlab, bitbucket, etc). Este ciclo ou transporte de mudanças dos arquivos passa por determinados estágios:
 > << UNTRACKED > UNMODIFIED > MODIFIED > STAGED >><< UNTRACKED > UNMODIFIED > MODIFIED > STAGED >>
 
 [![git - The lifecycle of the status of your files.](https://git-scm.com/book/en/v2/images/lifecycle.png "git - The lifecycle of the status of your files.")](https://git-scm.com/book/en/v2/images/lifecycle.png "git - The lifecycle of the status of your files.")
