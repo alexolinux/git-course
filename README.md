@@ -380,7 +380,6 @@ Existem 2 maneiras diferentes de unir branches. Elas são:
 -   git merge
 -   git rebase
 
-**git merge**
 **git merge** irá combinar múltiplas sequências de commits num histórico unificado. Na maioria dos casos, o **git merge** geralmente é utilizado para combinar duas branches. Nos exemplos a seguir, veremos uma espécia de merging pattern, nestes cenários teremos dois ponteiros de commits, indo para uma base em comum entre eles:
 
 ![alt text](https://wac-cdn.atlassian.com/dam/jcr:86eba9ec-9391-45ea-800a-948cec1f2ed7/Branch-2.png)
